@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <context:annotation-config />
+    <context:component-scan base-package="org.rsd.service.impl"/>
+    <context:component-scan base-package="org.rsd.controller"/>
+
+
+    <aop:aspectj-autoproxy />
+    <context:component-scan base-package="org.rsd.myAop"/>
+
+
+
+
+    <bean name="mySystemLog" class="org.rsd.myAop.MySystemLog"/>
+    <bean name="myPrintInfo" class="org.rsd.myAop.MyPrintInfo"/>
+    <bean name="mySayHello" class="org.rsd.myAop.MySayHello"/>
+    <bean name="myPrint" class="org.rsd.myAop.MyPoint"/>
+
+    <aop:config>
+        <aop:pointcut id="controller" expression="execution(* org.rsd.controller.*.*(..))"/>
+        <aop:advisor advice-ref="mySystemLog" pointcut-ref="controller"/>
+        <aop:advisor advice-ref="myPrintInfo" pointcut-ref="controller"/>
+        <aop:advisor advice-ref="mySayHello" pointcut-ref="controller"/>
+    </aop:config>
+
+    <aop:config>
+        <aop:aspect ref="myPrint">
+            <aop:before method="ss1" pointcut-ref="controller"/>
+            <aop:after method="ss2" pointcut-ref="controller"/>
+            <aop:around method="ss3" pointcut-ref="controller"/>
+        </aop:aspect>
+    </aop:config>
+
+
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/rsd_website" />
+        <property name="username" value="root" />
+        <property name="password" value="123456" />
+    </bean>
+    <bean name="factory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="plugins" >
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor"/>
+            </array>
+        </property>
+        <property name="mapperLocations" value="classpath:mapper/sysRole.mapper.xml" />
+        <property name="configuration" >
+            <bean class="org.apache.ibatis.session.Configuration">
+                <property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl" />
+                <property name="mapUnderscoreToCamelCase" value="true" />
+                <property name="cacheEnabled" value="true"/>
+            </bean>
+        </property>
+    </bean>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.rsd.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="factory" />
+    </bean>
+
+</beans>
