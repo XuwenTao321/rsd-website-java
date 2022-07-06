@@ -22,13 +22,14 @@ public class StudentDAOImpl implements IStudentDAO {
             student.setId(rs.getInt("id"));
             student.setName(rs.getString("name"));
             student.setAge(rs.getInt("age"));
+            student.setCreateTime(rs.getTimestamp("create_time"));
             return student;
         }
     };
 
     @Override
     public List<Student> queryList() {
-        String sql = "select * from bu_student";
+        String sql = "select * from bu_student order by id desc";
 
         List<Student> list = jdbcTemplate.query(sql, mapper);
         return list;
@@ -42,7 +43,19 @@ public class StudentDAOImpl implements IStudentDAO {
 
     @Override
     public void insert(Student student) {
-        String sql = "insert into bu_student values(null, ?, ?)";
-        jdbcTemplate.update(sql,student.getName(),student.getAge());
+        String sql = "insert into bu_student values(null, ?, ? ,?)";
+        jdbcTemplate.update(sql,student.getName(),student.getAge(),student.getCreateTime());
+    }
+
+    @Override
+    public void update(Student student) {
+        String sql = "update bu_student set name=?,age=? where id=?";
+        jdbcTemplate.update(sql,student.getName(),student.getAge(),student.getId());
+    }
+
+    @Override
+    public void delete(Integer id) {
+        String sql = "delete FROM bu_student where id=?";
+        jdbcTemplate.update(sql,id);
     }
 }

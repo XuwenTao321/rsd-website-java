@@ -15,7 +15,7 @@ public interface ISysRoleMapper {
     List<SysRole> queryList();
 
     @Select("select * from bu_sys_role where id=#{id}")
-    SysRole getById(Integer id);
+    SysRole getRoleById(Integer id);
 
     @Insert("insert into bu_sys_role values(null,#{name},#{createTime})")
     void insert(SysRole sysRole);

@@ -13,16 +13,16 @@
 
     <script type="text/javascript">
         function toUpdatePage(id){
-            location.href ="/sysUser/toUpdatePage/" + id;
+            location.href ="${pageContext.request.contextPath}/sysUser/toUpdatePage/" + id;
         }
         function doDelete(id){
             if (confirm("您确定删除吗？")){
-                location.href ="/sysUser/delete/" + id;
+                location.href ="${pageContext.request.contextPath}/sysUser/delete/" + id;
                 alert("删除成功！")
             }
         }
         function toAddPage() {
-            location.href ="/admin/jsp/sysUser/form.jsp";
+            location.href ="${pageContext.request.contextPath}/admin/jsp/sysUser/form.jsp";
         }
         
         $(document).ready(function(){

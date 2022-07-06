@@ -13,36 +13,17 @@
 
     <script type="text/javascript">
         function toUpdatePage(id){
-            location.href ="/sysRole/toUpdatePage/" + id;
+            location.href ="${pageContext.request.contextPath}/sysRole/toUpdatePage/" + id;
         }
         function doDelete(id){
             if (confirm("您确定删除吗？")){
-                location.href ="/sysRole/delete/" + id;
+                location.href ="${pageContext.request.contextPath}/sysRole/delete/" + id;
                 alert("删除成功！")
             }
         }
         function toAddPage() {
-            location.href ="/admin/jsp/sysRole/form.jsp";
+            location.href ="${pageContext.request.contextPath}/admin/jsp/sysRole/form.jsp";
         }
-        
-        $(document).ready(function(){
-            $(".click").click(function(){
-                $(".tip").fadeIn(200);
-            });
-
-            $(".tiptop a").click(function(){
-                $(".tip").fadeOut(200);
-            });
-
-            $(".sure").click(function(){
-                $(".tip").fadeOut(100);
-            });
-
-            $(".cancel").click(function(){
-                $(".tip").fadeOut(100);
-            });
-
-        });
     </script>
 
 
@@ -63,14 +44,6 @@
 <div class="rightinfo">
 
     <div class="tools">
-
-<%--        <ul class="toolbar">--%>
-<%--            <li class="click"><span><img src="/admin/images/t01.png" /></span>添加</li>--%>
-<%--&lt;%&ndash;            <li class="click"><span><img src="/admin/images/t02.png" /></span>修改</li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;            <li><span><img src="/admin/images/t03.png" /></span>删除</li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;            <li><span><img src="/admin/images/t04.png" /></span>统计</li>&ndash;%&gt;--%>
-<%--        </ul>--%>
-
 
         <ul class="toolbar1">
             <li onclick="toAddPage();"><span><img src="${pageContext.request.contextPath}/admin/images/t01.png" /></span>添加</li>
@@ -102,44 +75,7 @@
         </c:forEach>
         </tbody>
     </table>
-
-    <div class="pagin">
-        <div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
-        <ul class="paginList">
-            <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-            <li class="paginItem"><a href="javascript:;">1</a></li>
-            <li class="paginItem current"><a href="javascript:;">2</a></li>
-            <li class="paginItem"><a href="javascript:;">3</a></li>
-            <li class="paginItem"><a href="javascript:;">4</a></li>
-            <li class="paginItem"><a href="javascript:;">5</a></li>
-            <li class="paginItem more"><a href="javascript:;">...</a></li>
-            <li class="paginItem"><a href="javascript:;">10</a></li>
-            <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
-        </ul>
     </div>
-
-
-    <div class="tip">
-        <div class="tiptop"><span>提示信息</span><a></a></div>
-
-        <div class="tipinfo">
-            <span><img src="/admin/images/ticon.png" /></span>
-            <div class="tipright">
-                <p>是否确认对信息的修改 ？</p>
-                <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
-            </div>
-        </div>
-
-        <div class="tipbtn">
-            <input name="" type="button"  class="sure" value="确定" />&nbsp;
-            <input name="" type="button"  class="cancel" value="取消" />
-        </div>
-
-    </div>
-
-
-
-
 </div>
 
 <script type="text/javascript">

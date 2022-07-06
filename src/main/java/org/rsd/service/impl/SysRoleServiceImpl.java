@@ -21,7 +21,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
 
     @Override
     public SysRole getById(Integer id) {
-        return sysRoleMapper.getById(id);
+        return sysRoleMapper.getRoleById(id);
     }
 
     @Override

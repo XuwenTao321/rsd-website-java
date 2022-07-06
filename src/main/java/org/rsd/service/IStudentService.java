@@ -1,22 +1,19 @@
-package org.rsd.dao;
+package org.rsd.service;
+
 
 import org.rsd.bean.Student;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-public interface IStudentDAO {
+public interface IStudentService {
 
     List<Student> queryList();
 
-    Student getById(Integer id);
-
     void insert(Student student);
+
+    Student getById(Integer id);
 
     void update(Student student);
 
     void delete(Integer id);
-
-
 }

@@ -4,12 +4,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>无标题文档</title>
-    <link href="/admin/css/style.css" rel="stylesheet" type="text/css" />
+    <title>系统用户表单界面</title>
+    <link href="${pageContext.request.contextPath}/admin/css/style.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/admin/js/jquery-3.6.0.js"></script>
+
+    <script type="text/javascript">
+        $(function(){
+            $("p").html("中国");
+            $("#showInfo").html("日本");
+            $(".aaa").html("北京");
+            $(".aaa").css("color","red");
+        });
+    </script>
 </head>
 
 <body>
-
+<div class="aaa" id="showInfo"></div>
+<div class="aaa" id="showInfo2"></div>
+<p></p>
 <div class="place">
     <span>位置：</span>
     <ul class="placeul">
@@ -22,7 +35,7 @@
 
     <div class="formtitle"><span>基本信息</span></div>
 
-    <form action="/sysUser/save" method="post">
+    <form action="${pageContext.request.contextPath}/sysUser/save" method="post">
         <input type="hidden" name="id" value="${sysUser.id}"/>
         <ul class="forminfo">
             <li><label>登录名称</label><input name="loginName" type="text" class="dfinput" value="${sysUser.loginName}" /><i>登录名称只支持手机号</i></li>

@@ -16,6 +16,9 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <aop:aspectj-autoproxy />
+    <context:component-scan base-package="org.rsd.myAop"/>
+
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 
